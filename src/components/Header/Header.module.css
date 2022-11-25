@@ -1,0 +1,13 @@
+.header{
+  background-color: var(--backgroundHeader);
+  box-shadow: 0 0 5px grey;
+  padding: 5px 50px;
+  position: sticky;
+  top: 0;
+  z-index: var(--zIndexHeader);
+}
+
+.icon {
+  height: 44px;
+  width: 40px;
+}
