@@ -1,8 +1,4 @@
-main {
+.main {
   height: 150vh;
-}
-
-.main, .footer {
   margin: 0 50px;
-  
 }

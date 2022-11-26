@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
 
 import styles from './Layout.module.css';
 
@@ -15,7 +16,7 @@ const Layout: React.FunctionComponent<Props> = ({ children, ...props }: Props) =
       <main className={styles.main} {...props}>
         {children}
       </main>
-      <footer className={styles.footer}>Footer</footer>
+      <Footer />
     </>
   );
 };

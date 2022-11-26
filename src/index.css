@@ -1,6 +1,7 @@
 :root{
   --zIndexHeader: 100;
   --backgroundHeader: #fff;
+  --backgroundFooter: #61dafb;
 }
 
 body {
