@@ -1,4 +1,7 @@
+
+
 .main {
-  height: 150vh;
-  margin: 0 50px;
+  margin: 0 50px -50px 50px;
+  min-height: calc(100vh - 70px);
+  
 }
