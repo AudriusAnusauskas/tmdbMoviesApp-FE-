@@ -1,0 +1,9 @@
+.footer{
+  align-items: center;
+  background-color: var(--backgroundFooter);
+  display: grid;
+  grid-template-columns: auto;
+  height: 50px;
+  justify-content: center;
+  padding: 0 50px;
+}

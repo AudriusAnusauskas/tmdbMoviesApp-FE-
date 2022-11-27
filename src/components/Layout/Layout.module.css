@@ -1,8 +1,7 @@
-main {
-  height: 150vh;
-}
 
-.main, .footer {
-  margin: 0 50px;
+
+.main {
+  margin: 0 50px -50px 50px;
+  min-height: calc(100vh - 70px);
   
 }
