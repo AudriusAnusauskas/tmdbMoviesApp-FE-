@@ -1,5 +1,5 @@
 .backdrop {
-  background-color: hsla(0,0%,75.3%,.9);
+  background-color: var(--grey);
     display: flex;
     flex-direction: row-reverse;
     height: 100%;
