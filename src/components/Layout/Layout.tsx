@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { fetchStatus } from 'api/health';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
-import MoviesListContainer from 'components/MoviesListContainer/MoviesListContainer';
+import MoviesListContainer from 'containers/MoviesListContainer/MoviesListContainer';
 
 const Layout: React.FunctionComponent = () => {
   const { data: healthy } = useQuery('status', fetchStatus);

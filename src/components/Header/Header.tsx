@@ -2,7 +2,7 @@ import React, { ReactNode, useState, useEffect } from 'react';
 import { MyMoviesLogo } from 'components/Icons';
 import Sidebar from 'components/Sidebar/Sidebar';
 import HamburgerButton from 'components/HamburgerButton/HamburgerButton';
-import useMediaQuery from 'components/Hooks/useMediaQuery';
+import useMediaQuery from 'Hooks/useMediaQuery';
 
 import styles from './Header.module.css';
 
