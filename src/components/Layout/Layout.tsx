@@ -1,21 +1,19 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { fetchStatus } from 'api/health';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
+import MoviesListContainer from 'components/MoviesListContainer/MoviesListContainer';
 
-import styles from './Layout.module.css';
+const Layout: React.FunctionComponent = () => {
+  const { data: healthy } = useQuery('status', fetchStatus);
 
-interface Props {
-  children?: ReactNode;
-}
-
-const Layout: React.FunctionComponent<Props> = ({ children, ...props }: Props) => {
   return (
     <>
       <Header />
-
-      <main className={styles.main} {...props}>
-        {children}
-      </main>
+      <MoviesListContainer>
+        <p>API Status: {healthy ? 'Is running' : 'Something is wrong!'}</p>
+      </MoviesListContainer>
       <Footer />
     </>
   );
