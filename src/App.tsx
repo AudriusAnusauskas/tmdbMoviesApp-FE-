@@ -1,9 +1,12 @@
 import Layout from 'components/Layout/Layout';
+import MainRouter from 'navigation/MainRouter';
 
 function App(): JSX.Element {
   return (
     <>
-      <Layout></Layout>
+      <Layout>
+        <MainRouter />
+      </Layout>
     </>
   );
 }
