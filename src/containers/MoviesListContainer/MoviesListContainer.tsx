@@ -1,17 +1,13 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { fetchStatus } from 'api/health';
 
-import styles from './MoviesListContainer.module.css';
-
-interface Props {
-  children?: ReactNode;
-}
-
-const MoviesListContainer: React.FunctionComponent<Props> = ({ children, ...props }: Props) => {
+const MoviesListContainer: React.FunctionComponent = () => {
+  const { data: healthy } = useQuery('status', fetchStatus);
   return (
     <div>
-      <main className={styles.main} {...props}>
-        {children}
-      </main>
+      <h2>Movie List</h2>
+      <p>API Status: {healthy ? 'Is running' : 'Something is wrong!'}</p>
     </div>
   );
 };
