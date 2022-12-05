@@ -1,0 +1,14 @@
+.navContainer{
+  color: var(--black);
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  text-decoration: none;
+  width: max-content;
+}
+
+.active, a:hover{
+  border-bottom: 2px solid var(--secondary);
+}
+
+
