@@ -5,12 +5,10 @@ import { routes } from './routes';
 
 const MainRouter = (): JSX.Element => {
   return (
-    <>
-      <Routes>
-        <Route element={<MoviesListContainer />} path={routes.Index} />
-        <Route element={<MoviesListContainer />} path={routes.Movies} />
-      </Routes>
-    </>
+    <Routes>
+      <Route element={<MoviesListContainer />} path={routes.Index} />
+      <Route element={<MoviesListContainer />} path={routes.Movies} />
+    </Routes>
   );
 };
 

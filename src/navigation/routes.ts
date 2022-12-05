@@ -1,1 +1,4 @@
-export const routes = { Index: '/', Movies: '/movies' };
+export const routes = {
+  Index: '/',
+  Movies: '/movies',
+};
