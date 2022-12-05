@@ -2,7 +2,8 @@ import React, { ReactNode, useState, useEffect } from 'react';
 import { MyMoviesLogo } from 'components/Icons';
 import Sidebar from 'components/Sidebar/Sidebar';
 import HamburgerButton from 'components/HamburgerButton/HamburgerButton';
-import useMediaQuery from 'components/Hooks/useMediaQuery';
+import NavigationLink from 'components/NavigationLink/NavigationLink';
+import useMediaQuery from 'Hooks/useMediaQuery';
 
 import styles from './Header.module.css';
 
@@ -32,11 +33,10 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
     <header className={styles.header} {...props}>
       <MyMoviesLogo className={styles.icon} />
       <>
-        {matches && <HamburgerButton isActive={isSidebarVisible} onClick={handleButtonClick} />}
+        {matches ? <HamburgerButton isActive={isSidebarVisible} onClick={handleButtonClick} /> : <NavigationLink />}
         {isSidebarVisible && (
           <Sidebar onBackdropClick={closeSidebar}>
-            <div>Hello</div>
-            <div>Goodbye</div>
+            <NavigationLink />
           </Sidebar>
         )}
       </>

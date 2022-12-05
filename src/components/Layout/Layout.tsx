@@ -1,21 +1,18 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
+import MoviesListContainer from 'containers/MoviesListContainer/MoviesListContainer';
 
 import styles from './Layout.module.css';
 
-interface Props {
-  children?: ReactNode;
-}
-
-const Layout: React.FunctionComponent<Props> = ({ children, ...props }: Props) => {
+const Layout: React.FunctionComponent = () => {
   return (
     <>
       <Header />
-
-      <main className={styles.main} {...props}>
-        {children}
+      <main className={styles.main}>
+        <MoviesListContainer />
       </main>
+
       <Footer />
     </>
   );
