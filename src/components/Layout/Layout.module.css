@@ -1,5 +1,4 @@
 .main {
   margin: 0 50px -50px 50px;
-  min-height: calc(100vh - 70px);
-  
+  min-height: 70px;
 }
