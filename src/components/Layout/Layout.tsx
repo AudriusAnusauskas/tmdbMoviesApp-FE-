@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import MoviesListContainer from 'containers/MoviesListContainer/MoviesListContainer';
@@ -12,7 +11,6 @@ const Layout: React.FunctionComponent = () => {
       <main className={styles.main}>
         <MoviesListContainer />
       </main>
-
       <Footer />
     </>
   );
