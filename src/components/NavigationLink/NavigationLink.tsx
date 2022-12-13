@@ -7,7 +7,7 @@ const NavigationLink = (): JSX.Element => {
   return (
     <NavLink
       className={({ isActive }) =>
-        classNames(styles.navContainer, {
+        classNames(styles.navContainer, styles.link, {
           [styles.active]: isActive,
         })
       }
