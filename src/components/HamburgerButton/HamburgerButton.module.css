@@ -9,9 +9,9 @@
 }
 
 .hamburger {
-    cursor: pointer;
-    display: block;
-    width: 25px;
+  cursor: pointer;
+  display: block;
+  width: 25px;
 }
 
 .hamburger.active .bar:nth-child(2) {
