@@ -7,8 +7,9 @@
   width: max-content;
 }
 
-.active, a:hover{
+.active, .link:hover{
   border-bottom: 2px solid var(--secondary);
-}
-
+  margin-bottom: -2px;
+  }
+  
 
