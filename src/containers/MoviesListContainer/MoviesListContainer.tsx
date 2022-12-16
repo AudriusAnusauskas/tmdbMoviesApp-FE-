@@ -6,9 +6,18 @@ import styles from './MoviesListContainer.module.css';
 import MovieCard from './MovieCard';
 
 const MoviesListContainer: React.FunctionComponent = () => {
-  const { data } = useQuery('movies/', getMovies);
+  const { data, isError, isLoading, error } = useQuery('movies/', getMovies);
+  if (isLoading) return <Loading />;
 
-  return <div className={styles.moviesList}>{data ? <MovieCard /> : <Loading />}</div>;
+  if (isError) return <span>Error: {error}</span>;
+
+  return (
+    <div className={styles.moviesList}>
+      {data?.movies.map((movie) => (
+        <MovieCard key={movie.movieId} {...movie} />
+      ))}
+    </div>
+  );
 };
 
 export default MoviesListContainer;
