@@ -16,7 +16,7 @@
   padding: 40px 0;
 }
 .movieInfoContainer{
- display:flex;
+  display:flex;
 }
 .moviePosterWrapper{
   max-width: 400px;
