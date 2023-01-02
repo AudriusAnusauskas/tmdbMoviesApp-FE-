@@ -72,3 +72,13 @@
 .descriptionContainer>h3{
   font-size: 1.17em;
 }
+@media screen and (max-width: 768px) {
+  .movieInfoContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .movieDataWrapper{
+    padding: 20px 0 0;
+  }
+}
