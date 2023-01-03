@@ -7,6 +7,9 @@
   margin-top: 40px;
   
 }
+.mainContentWrapper{
+  margin: 0 50px -50px 50px;
+}
 
 @media screen and (max-width: 1200px) {
   .moviesList{

@@ -12,10 +12,12 @@ const MoviesListContainer: React.FunctionComponent = () => {
   if (isError) return <span>Error: {error}</span>;
 
   return (
-    <div className={styles.moviesList}>
-      {data?.movies.map((movie) => (
-        <MovieCard key={movie.movieId} {...movie} />
-      ))}
+    <div className={styles.mainContentWrapper}>
+      <div className={styles.moviesList}>
+        {data?.movies.map((movie) => (
+          <MovieCard key={movie.movieId} {...movie} />
+        ))}
+      </div>
     </div>
   );
 };
