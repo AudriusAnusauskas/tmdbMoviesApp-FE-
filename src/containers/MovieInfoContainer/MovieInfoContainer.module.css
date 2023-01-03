@@ -74,9 +74,9 @@
 }
 @media screen and (max-width: 768px) {
   .movieInfoContainer{
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
   .movieDataWrapper{
     padding: 20px 0 0;

@@ -1,14 +1,9 @@
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
-import { ReactNode } from 'react';
 
 import styles from './Layout.module.css';
 
-type LayoutProps = {
-  children: ReactNode;
-};
-
-const Layout: React.FunctionComponent<LayoutProps> = ({ children }: LayoutProps) => {
+const Layout: React.FunctionComponent = ({ children }) => {
   return (
     <>
       <Header />
