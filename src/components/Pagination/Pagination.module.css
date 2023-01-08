@@ -12,7 +12,7 @@
 .paginationItem {
   align-items: center;
   border: 1px solid var(--grey);
-  border-radius: 50%;
+  border-radius: 16px;
   cursor: pointer;
   display: flex;
   font-size: 16px;
