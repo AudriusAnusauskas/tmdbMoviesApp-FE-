@@ -39,7 +39,7 @@ const Pagination = ({ totalPages, activePage, onPageChange, siblingCount = 1, cl
         </span>
       </li>
 
-      {paginationRange?.map((pageNumber) => {
+      {paginationRange.map((pageNumber) => {
         if (pageNumber === '...') {
           return <li className={styles.dots}>...</li>;
         }
@@ -49,7 +49,7 @@ const Pagination = ({ totalPages, activePage, onPageChange, siblingCount = 1, cl
             className={classnames(styles.paginationItem, {
               [styles.active]: pageNumber === activePage,
             })}
-            key={Math.random()}
+            key={`movies-pagination-${pageNumber}`}
             onClick={() => onPageChange(pageNumber as number)}
           >
             {pageNumber}

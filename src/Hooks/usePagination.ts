@@ -39,6 +39,7 @@ const usePagination = ({ totalPages, siblingCount, page }: UsePaginationProps) =
       const middleRange = range(leftSiblingIndex, rightSiblingIndex);
       return [firstPageIndex, '...', ...middleRange, '...', lastPageIndex];
     }
+    return [];
   }, [totalPages, siblingCount, page]);
 
   return paginationRange;
