@@ -1,5 +1,5 @@
 export const routes = {
   Index: '/',
-  Movies: '/movies',
+  Movies: '/movies/*',
   Movie: '/movie/:movieId',
 };
