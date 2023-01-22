@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { getMovies } from 'api/movies/movies';
 import Loading from 'components/Loading/Loading';
 import Pagination from 'components/Pagination/Pagination';
+import Form from 'components/Form/Form';
 
 import MovieCard from './MovieCard';
 import styles from './MoviesListContainer.module.css';
@@ -20,6 +21,7 @@ const MoviesListContainer: React.FunctionComponent = () => {
   const movies = data?.page === activePage ? data.movies : [];
   return (
     <div className={styles.mainContentWrapper}>
+      <Form />
       <div className={styles.moviesList}>
         {movies.map((movie) => (
           <MovieCard key={movie.movieId} {...movie} />
