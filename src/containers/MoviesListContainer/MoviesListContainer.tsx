@@ -5,6 +5,9 @@ import { getMovies } from 'api/movies/movies';
 import Loading from 'components/Loading/Loading';
 import Pagination from 'components/Pagination/Pagination';
 
+import SelectFieldStateless from '../../components/Form/SelectFieldStateless/SelectFieldStateless';
+import TextInputFieldStateless from '../../components/Form/TextInputFieldStateless/TextInputFieldStateless';
+import { genreOptions, sortOptions } from '../../components/Form/SelectFieldStateless/options';
 import MovieCard from './MovieCard';
 import styles from './MoviesListContainer.module.css';
 
@@ -20,6 +23,11 @@ const MoviesListContainer: React.FunctionComponent = () => {
   const movies = data?.page === activePage ? data.movies : [];
   return (
     <div className={styles.mainContentWrapper}>
+      <form className={styles.filterForm}>
+        <TextInputFieldStateless id="text" placeholder="Enter movie title" type="text" />
+        <SelectFieldStateless closeMenuOnSelect={true} isClearable={false} options={genreOptions} placeholder="Select genre" isMulti />
+        <SelectFieldStateless closeMenuOnSelect={true} isClearable={false} options={sortOptions} placeholder="Select sorting" />
+      </form>
       <div className={styles.moviesList}>
         {movies.map((movie) => (
           <MovieCard key={movie.movieId} {...movie} />
