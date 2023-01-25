@@ -5,9 +5,9 @@ import { getMovies } from 'api/movies/movies';
 import Loading from 'components/Loading/Loading';
 import Pagination from 'components/Pagination/Pagination';
 
-import SelectFieldStateless from '../../components/Form/SelectFieldStateless/SelectFieldStateless';
-import TextInputFieldStateless from '../../components/Form/TextInputFieldStateless/TextInputFieldStateless';
-import { genreOptions, sortOptions } from '../../components/Form/SelectFieldStateless/options';
+import SelectFieldStateless from '../../components/Form/SelectField/SelectFieldStateless';
+import TextInputField from '../../components/Form/TextInputField/TextInputField';
+import { genreOptions, sortOptions } from '../../components/Form/SelectField/options';
 import MovieCard from './MovieCard';
 import styles from './MoviesListContainer.module.css';
 
@@ -24,7 +24,7 @@ const MoviesListContainer: React.FunctionComponent = () => {
   return (
     <div className={styles.mainContentWrapper}>
       <form className={styles.filterForm}>
-        <TextInputFieldStateless id="text" placeholder="Enter movie title" type="text" />
+        <TextInputField placeholder="Enter movie title" type="text" />
         <SelectFieldStateless closeMenuOnSelect={true} isClearable={false} options={genreOptions} placeholder="Select genre" isMulti />
         <SelectFieldStateless closeMenuOnSelect={true} isClearable={false} options={sortOptions} placeholder="Select sorting" />
       </form>
