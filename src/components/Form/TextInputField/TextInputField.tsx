@@ -6,8 +6,9 @@ import styles from './TextInputField.module.css';
 interface Props {
   type: string;
   placeholder: string;
+  name: string;
 }
 
-const TextInputField: React.FC<Props> = ({ ...props }) => <Field className={styles.textInputField} component={TextInputFieldAdapter} name="input" {...props} />;
+const TextInputField: React.FC<Props> = ({ ...props }) => <Field className={styles.textInputField} component={TextInputFieldAdapter} {...props} />;
 
 export default TextInputField;
