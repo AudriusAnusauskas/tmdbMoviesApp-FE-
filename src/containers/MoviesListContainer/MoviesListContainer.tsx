@@ -4,8 +4,9 @@ import { useQuery } from 'react-query';
 import { getMovies } from 'api/movies/movies';
 import Loading from 'components/Loading/Loading';
 import Pagination from 'components/Pagination/Pagination';
+import { Formik } from 'formik';
 
-import SelectFieldStateless from '../../components/Form/SelectField/SelectFieldStateless';
+import SelectField from '../../components/Form/SelectField/SelectField';
 import TextInputField from '../../components/Form/TextInputField/TextInputField';
 import { genreOptions, sortOptions } from '../../components/Form/SelectField/options';
 import MovieCard from './MovieCard';
@@ -24,9 +25,39 @@ const MoviesListContainer: React.FunctionComponent = () => {
   return (
     <div className={styles.mainContentWrapper}>
       <form className={styles.filterForm}>
-        <TextInputField placeholder="Enter movie title" type="text" />
-        <SelectFieldStateless closeMenuOnSelect={true} isClearable={false} options={genreOptions} placeholder="Select genre" isMulti />
-        <SelectFieldStateless closeMenuOnSelect={true} isClearable={false} options={sortOptions} placeholder="Select sorting" />
+        <Formik
+          initialValues={{ inputMovie: '' }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+            }, 400);
+          }}
+        >
+          <TextInputField placeholder="Enter movie title" type="text" />
+        </Formik>
+        <Formik
+          initialValues={{ selectGenre: '' }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+            }, 400);
+          }}
+        >
+          <SelectField closeMenuOnSelect={true} isClearable={false} name="selectGenre" options={genreOptions} placeholder="Select genre" />
+        </Formik>
+        <Formik
+          initialValues={{ selectSorting: '' }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+            }, 400);
+          }}
+        >
+          <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={false} name="selectSorting" options={sortOptions} placeholder="Select sorting" />
+        </Formik>
       </form>
       <div className={styles.moviesList}>
         {movies.map((movie) => (

@@ -1,10 +1,6 @@
 import React from 'react';
 import { FieldProps } from 'formik';
 
-// interface Props extends FieldProps {
-//   // placeholder: string;
-// }
-
 const TextInputFieldAdapter: React.FC<FieldProps> = ({ field, form, ...props }) => {
   const { name, value } = field;
   const { touched, errors } = form;
