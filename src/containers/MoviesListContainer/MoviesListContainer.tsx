@@ -24,21 +24,21 @@ const MoviesListContainer: React.FunctionComponent = () => {
   const movies = data?.page === activePage ? data.movies : [];
   return (
     <div className={styles.mainContentWrapper}>
-      <form className={styles.filterForm}>
-        <Formik
-          initialValues={{ inputMovie: '', selectGenre: '', selectSorting: '' }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
-          }}
-        >
+      <Formik
+        initialValues={{ inputMovie: '', selectGenre: '', selectSorting: '' }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        <form className={styles.filterForm}>
           <TextInputField name="inputMovie" placeholder="Enter movie title" type="text" />
           <SelectField closeMenuOnSelect={true} isClearable={false} name="selectGenre" options={genreOptions} placeholder="Select genre" />
           <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={false} name="selectSorting" options={sortOptions} placeholder="Select sorting" />
-        </Formik>
-      </form>
+        </form>
+      </Formik>
       <div className={styles.moviesList}>
         {movies.map((movie) => (
           <MovieCard key={movie.movieId} {...movie} />
