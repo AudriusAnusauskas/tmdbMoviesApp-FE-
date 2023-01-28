@@ -3,6 +3,8 @@ import Select from 'react-select';
 
 import styles from './SelectFieldStateless.module.css';
 
+type SelectValue = string | string[];
+
 type MySelectProps = {
   closeMenuOnSelect?: boolean;
   isClearable?: boolean;
@@ -10,6 +12,9 @@ type MySelectProps = {
   options: { value: string; label: string }[];
   placeholder: string;
   value?: string;
+  onChange: (newValue: SelectValue) => void;
+  onBlur?: (e: FocusEvent) => void;
+  hasError: boolean;
 };
 
 const SelectFieldStateless: React.FunctionComponent<MySelectProps> = (props) => {

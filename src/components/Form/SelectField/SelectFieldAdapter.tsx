@@ -1,6 +1,9 @@
 import React from 'react';
 import { FieldProps } from 'formik';
-import Select from 'react-select';
+
+import SelectFieldStateless from './SelectFieldStateless';
+
+type SelectValue = string | string[];
 
 interface Props {
   closeMenuOnSelect?: boolean;
@@ -9,14 +12,17 @@ interface Props {
   options: { value: string; label: string }[];
   placeholder: string;
   value?: string;
+  onChange: (value: SelectValue) => void;
+  onBlur?: (e: FocusEvent) => void;
+  hasError: boolean;
 }
 
 const SelectFieldAdapter: React.FC<FieldProps & Props> = ({ field, form, ...props }) => {
-  const { name, value } = field;
+  const { value, name } = field;
   const { touched, errors } = form;
-  const hasError = touched[name] && errors[name];
+  const hasError = typeof touched[name] === 'boolean' && typeof errors[name] === 'boolean';
 
-  return <Select className={hasError ? 'error' : ''} {...field} {...props} value={value} onBlur={field.onBlur} onChange={field.onChange} />;
+  return <SelectFieldStateless {...field} {...props} hasError={hasError} value={value} onBlur={props.onBlur} onChange={props.onChange} />;
 };
 
 export default SelectFieldAdapter;

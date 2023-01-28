@@ -1,4 +1,4 @@
-import { Field } from 'formik';
+import { Field, useField } from 'formik';
 
 import SelectFieldAdapter from './SelectFieldAdapter';
 import styles from './SelectField.module.css';
@@ -14,7 +14,8 @@ interface Props {
 }
 
 const SelectField: React.FC<Props> = ({ ...props }) => {
-  return <Field className={styles.selectField} component={SelectFieldAdapter} {...props} />;
+  const [state] = useField(props.name);
+  return <Field className={styles.selectField} component={SelectFieldAdapter} value={state.value} {...props} />;
 };
 
 export default SelectField;

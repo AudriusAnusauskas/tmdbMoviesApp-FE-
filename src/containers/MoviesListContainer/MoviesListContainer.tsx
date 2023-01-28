@@ -25,7 +25,7 @@ const MoviesListContainer: React.FunctionComponent = () => {
   return (
     <div className={styles.mainContentWrapper}>
       <Formik
-        initialValues={{ inputMovie: '', selectGenre: '', selectSorting: '' }}
+        initialValues={{ inputMovie: '', selectGenre: [], selectSorting: '' }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
@@ -35,7 +35,7 @@ const MoviesListContainer: React.FunctionComponent = () => {
       >
         <form className={styles.filterForm}>
           <TextInputField name="inputMovie" placeholder="Enter movie title" type="text" />
-          <SelectField closeMenuOnSelect={true} isClearable={false} name="selectGenre" options={genreOptions} placeholder="Select genre" />
+          <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={true} name="selectGenre" options={genreOptions} placeholder="Select genre" />
           <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={false} name="selectSorting" options={sortOptions} placeholder="Select sorting" />
         </form>
       </Formik>
