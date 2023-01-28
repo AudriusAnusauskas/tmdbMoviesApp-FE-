@@ -4,10 +4,11 @@ import { useQuery } from 'react-query';
 import { getMovies } from 'api/movies/movies';
 import Loading from 'components/Loading/Loading';
 import Pagination from 'components/Pagination/Pagination';
+import { Formik } from 'formik';
 
-import SelectFieldStateless from '../../components/Form/SelectFieldStateless/SelectFieldStateless';
-import TextInputFieldStateless from '../../components/Form/TextInputFieldStateless/TextInputFieldStateless';
-import { genreOptions, sortOptions } from '../../components/Form/SelectFieldStateless/options';
+import SelectField from '../../components/Form/SelectField/SelectField';
+import TextInputField from '../../components/Form/TextInputField/TextInputField';
+import { genreOptions, sortOptions } from '../../components/Form/SelectField/options';
 import MovieCard from './MovieCard';
 import styles from './MoviesListContainer.module.css';
 
@@ -23,11 +24,21 @@ const MoviesListContainer: React.FunctionComponent = () => {
   const movies = data?.page === activePage ? data.movies : [];
   return (
     <div className={styles.mainContentWrapper}>
-      <form className={styles.filterForm}>
-        <TextInputFieldStateless id="text" placeholder="Enter movie title" type="text" />
-        <SelectFieldStateless closeMenuOnSelect={true} isClearable={false} options={genreOptions} placeholder="Select genre" isMulti />
-        <SelectFieldStateless closeMenuOnSelect={true} isClearable={false} options={sortOptions} placeholder="Select sorting" />
-      </form>
+      <Formik
+        initialValues={{ inputMovie: '', selectGenre: [], selectSorting: '' }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        <form className={styles.filterForm}>
+          <TextInputField name="inputMovie" placeholder="Enter movie title" type="text" />
+          <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={true} name="selectGenre" options={genreOptions} placeholder="Select genre" />
+          <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={false} name="selectSorting" options={sortOptions} placeholder="Select sorting" />
+        </form>
+      </Formik>
       <div className={styles.moviesList}>
         {movies.map((movie) => (
           <MovieCard key={movie.movieId} {...movie} />
