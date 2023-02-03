@@ -7,6 +7,7 @@ interface Props {
   closeMenuOnSelect: boolean;
   isClearable: boolean;
   isMulti?: boolean;
+  // eslint-disable-next-line
   options: { value: string; label: string }[];
   placeholder: string;
   name: string;

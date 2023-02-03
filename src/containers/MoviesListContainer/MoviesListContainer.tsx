@@ -1,22 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getMovies } from 'api/movies/movies';
 import Loading from 'components/Loading/Loading';
 import Pagination from 'components/Pagination/Pagination';
 import { Formik } from 'formik';
+import { get } from 'api/shared/methods';
 
 import SelectField from '../../components/Form/SelectField/SelectField';
 import TextInputField from '../../components/Form/TextInputField/TextInputField';
-import { genreOptions, sortOptions } from '../../components/Form/SelectField/options';
+// import { genreOptions } from '../../components/Form/SelectField/options';
 import MovieCard from './MovieCard';
 import styles from './MoviesListContainer.module.css';
+
+type Genre = {
+  id: string;
+  name: string;
+};
+
+type Genres = {
+  genres: Genre[];
+};
+type Sort = {
+  code: string;
+  name: string;
+};
 
 const MoviesListContainer: React.FunctionComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams({});
   const page = searchParams.get('page');
   const activePage = page ? parseInt(page, 10) : 1;
   const { data, isError, isLoading, error } = useQuery(['movies', { page: activePage }], () => getMovies(activePage));
+
+  const [genreOptions, setGenreOptions] = useState<Array<{ value: string; label: string }>>([]);
+  const [sortOptions, setSortOptions] = useState<Array<{ value: string; label: string }>>([]);
+
+  useEffect(() => {
+    const getGenreOptions = async () => {
+      const resGenres = await get<Genres>(`genres`).then((e) => e.data.genres);
+      setGenreOptions(resGenres.map((item: Genre) => ({ value: item.id, label: item.name })));
+    };
+    getGenreOptions();
+  }, []);
+  useEffect(() => {
+    const getSortOptions = async () => {
+      const resSort = await get<Sort[]>(`sort-options`).then((e) => e.data);
+      setSortOptions(resSort.map((item: Sort) => ({ value: item.code, label: item.name })));
+    };
+    getSortOptions();
+  }, []);
 
   if (isLoading) return <Loading />;
 

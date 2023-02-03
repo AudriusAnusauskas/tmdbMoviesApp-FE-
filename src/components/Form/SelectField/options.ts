@@ -1,97 +1,29 @@
-export const genreOptions = [
-  {
-    value: '28',
-    label: 'Action',
-  },
-  {
-    value: '12',
-    label: 'Adventure',
-  },
-  {
-    value: '16',
-    label: 'Animation',
-  },
-  {
-    value: '35',
-    label: 'Comedy',
-  },
-  {
-    value: '80',
-    label: 'Crime',
-  },
-  {
-    value: '99',
-    label: 'Documentary',
-  },
-  {
-    value: '18',
-    label: 'Drama',
-  },
-  {
-    value: '10751',
-    label: 'Family',
-  },
-  {
-    value: '14',
-    label: 'Fantasy',
-  },
-  {
-    value: '36',
-    label: 'History',
-  },
-  {
-    value: '27',
-    label: 'Horror',
-  },
-  {
-    value: '10402',
-    label: 'Music',
-  },
-  {
-    value: '9648',
-    label: 'Mystery',
-  },
-  {
-    value: '10749',
-    label: 'Romance',
-  },
-  {
-    value: '878',
-    label: 'Science Fiction',
-  },
-  {
-    value: '10770',
-    label: 'TV Movie',
-  },
-  {
-    value: '53',
-    label: 'Thriller',
-  },
-  {
-    value: '10752',
-    label: 'War',
-  },
-  {
-    value: '37',
-    label: 'Western',
-  },
-];
+import { get } from 'api/shared/methods';
+
+export type Genres = {
+  genres: Genre[];
+};
+
+type Genre = {
+  id: number;
+  name: string;
+};
+
+async function getGenreOptions(): Promise<Genres> {
+  const res = await get<Genres>(`genres`).then((e) =>
+    e.data.genres.map((a: Genre) => {
+      return { value: a.id, label: a.name };
+    }),
+  );
+  console.log(res);
+  // eslint-disable-next-line
+  return res as any;
+}
+export const genreOptions = getGenreOptions();
 
 export const sortOptions = [
   {
     value: 'original_title.asc',
     label: 'Title ASC',
-  },
-  {
-    value: 'original_title.desc',
-    label: 'Title DESC',
-  },
-  {
-    value: 'vote_average.desc',
-    label: 'Vote rating DESC',
-  },
-  {
-    value: 'vote_average.asc',
-    label: 'Vote rating ASC',
   },
 ];
