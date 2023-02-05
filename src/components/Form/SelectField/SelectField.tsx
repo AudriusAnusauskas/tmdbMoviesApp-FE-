@@ -8,7 +8,7 @@ interface Props {
   isClearable: boolean;
   isMulti?: boolean;
   // eslint-disable-next-line
-  options: { value: string; label: string }[];
+  options: { value: string | number; label: string }[];
   placeholder: string;
   name: string;
   value?: string;

@@ -1,15 +1,13 @@
 import React from 'react';
 import { FieldProps } from 'formik';
 
-import SelectFieldStateless from './SelectFieldStateless';
-
-type SelectValue = string | string[];
+import SelectFieldStateless, { SelectValue } from './SelectFieldStateless';
 
 interface Props {
   closeMenuOnSelect?: boolean;
   isClearable?: boolean;
   isMulti?: boolean;
-  options: { value: string; label: string }[];
+  options: { value: string | number; label: string }[];
   placeholder: string;
   value?: string;
   onChange: (value: SelectValue) => void;

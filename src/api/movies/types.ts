@@ -15,8 +15,22 @@ export type Movie = {
   voteAverage: number;
 };
 
-type Genre = {
+export type Genre = {
   id: number;
+  name: string;
+};
+
+export type GenreFilter = {
+  id: number;
+  name: string;
+};
+
+export type Genres = {
+  genres: Genre[];
+};
+
+export type Sort = {
+  code: string;
   name: string;
 };
 
