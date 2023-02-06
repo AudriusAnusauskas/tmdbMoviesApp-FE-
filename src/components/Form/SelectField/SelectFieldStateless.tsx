@@ -3,7 +3,7 @@ import Select, { OnChangeValue } from 'react-select';
 
 import styles from './SelectFieldStateless.module.css';
 
-export type SelectValue = string | string[] | number | number[];
+export type SelectValue = string | number;
 
 type MySelectProps = {
   closeMenuOnSelect?: boolean;
@@ -12,7 +12,7 @@ type MySelectProps = {
   options: Option[];
   placeholder: string;
   value?: string;
-  onChange: (newValue: SelectValue) => void;
+  onChange: (newValue: SelectValue | SelectValue[]) => void;
   onBlur?: (e: FocusEvent) => void;
   hasError: boolean;
 };
@@ -25,11 +25,11 @@ type Option = {
 const SelectFieldStateless: React.FunctionComponent<MySelectProps> = (props) => {
   const onChange = (value: OnChangeValue<Option, boolean>) => {
     if (props.isMulti && Array.isArray(value)) {
-      onChange?.(value.map((option) => option.value));
+      props.onChange?.(value.map((option) => option.value));
     }
 
-    if (!props.isMulti && value) {
-      onChange?.(value);
+    if (!props.isMulti && value && 'value' in value) {
+      props.onChange?.(value.value);
     }
   };
 

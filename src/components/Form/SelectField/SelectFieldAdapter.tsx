@@ -10,7 +10,7 @@ interface Props {
   options: { value: string | number; label: string }[];
   placeholder: string;
   value?: string;
-  onChange: (value: SelectValue) => void;
+  onChange: (value: SelectValue | SelectValue[]) => void;
   onBlur?: (e: FocusEvent) => void;
   hasError: boolean;
 }
