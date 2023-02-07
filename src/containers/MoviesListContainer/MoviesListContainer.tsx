@@ -12,28 +12,34 @@ import styles from './MoviesListContainer.module.css';
 const MoviesListContainer: React.FunctionComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page');
-  const title = searchParams.get('title') ?? 'harry';
-  const genres = searchParams.get('genres') ?? [12];
-  const sort = searchParams.get('sort') ?? 'original_title.asc';
   const activePage = page ? parseInt(page, 10) : 1;
 
-  const fetchMovies = () => {
-    return getMovies(activePage, title, genres as number[], sort);
+  const movieFilter = {
+    title: searchParams.get('title') ?? '',
+    genres: searchParams.getAll('genres') ?? [],
+    sort: searchParams.get('sort') ?? '',
   };
 
-  const { data, isError, isLoading, error } = useQuery(['movies', { page: activePage, title, genres, sort }], fetchMovies);
+  const fetchMovies = () => {
+    return getMovies(activePage, movieFilter.title, movieFilter.genres, movieFilter.sort);
+  };
+
+  const { data, isError, isLoading, error } = useQuery(
+    ['movies', { page: activePage, title: movieFilter.title, genres: movieFilter.genres, sort: movieFilter.sort }],
+    fetchMovies,
+  );
   if (isLoading) return <Loading />;
 
   if (isError) return <span>Error: {error}</span>;
   const movies = data?.page === activePage ? data.movies : [];
 
-  const onFilter = (title: string, genres: string, sort: string) => {
-    setSearchParams({ title, genres, sort, page: '1' });
-  };
+  // const onFilter = (title: string, genres: string, sort: string) => {
+  //   setSearchParams({ title, genres, sort, page: '1' });
+  // };
 
   return (
     <div className={styles.mainContentWrapper}>
-      <MoviesListFilter filterParams={onFilter} />
+      <MoviesListFilter initialValues={movieFilter} />
       <div className={styles.moviesList}>
         {movies.map((movie) => (
           <MovieCard key={movie.movieId} {...movie} />

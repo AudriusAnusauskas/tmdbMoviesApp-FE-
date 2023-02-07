@@ -8,11 +8,21 @@ import TextInputField from '../TextInputField/TextInputField';
 import styles from './MoviesListFilter.module.css';
 import { Genre, Genres, Sort } from '../../../api/movies/types';
 
-interface FilterParams {
-  [key: string]: any;
-}
+// interface FilterParams {
+//   [key: string]: any;
+// }
 
-const MoviesListFilter: React.FC<{ filterParams: FilterParams }> = () => {
+export type MovieListFilterFormValues = {
+  title: string;
+  genres: string[];
+  sort: string;
+};
+
+type MovieListFilterProps = {
+  initialValues: MovieListFilterFormValues;
+};
+
+const MoviesListFilter: React.FC<MovieListFilterProps> = (props) => {
   const [genreOptions, setGenreOptions] = useState<Array<{ value: number; label: string }>>([]);
   const [sortOptions, setSortOptions] = useState<Array<{ value: string; label: string }>>([]);
 
@@ -31,39 +41,40 @@ const MoviesListFilter: React.FC<{ filterParams: FilterParams }> = () => {
     getSortOptions();
   }, []);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const initialValues = {
-    page: searchParams.get('page') ?? 1,
-    title: searchParams.get('title') ?? '',
-    genres: searchParams.get('genres') ?? [],
-    sort: searchParams.get('sort') ?? '',
-  };
+  console.log(props.initialValues);
 
-  const handleFilter = (values: any) => {
-    setSearchParams({
-      page: '1',
-      title: values.inputMovie,
-      genres: values.selectGenre,
-      sort: values.selectSorting,
-    });
+  const [searchParams, setSearchParams] = useSearchParams();
+  // const initialValues = {
+  //   page: searchParams.get('page') ?? 1,
+  //   title: searchParams.get('title') ?? '',
+  //   genres: searchParams.get('genres') ?? [],
+  //   sort: searchParams.get('sort') ?? '',
+  // };
+
+  const handleFilter = (values: MovieListFilterFormValues) => {
+    const params: any = {};
+
+    if (values.title) {
+      params.title = values.title;
+    }
+    if (values.genres) {
+      params.genres = values.genres;
+    }
+    if (values.sort) {
+      params.sort = values.sort;
+    }
+
+    setSearchParams({ ...searchParams, ...params });
   };
 
   return (
     <div>
-      <Formik initialValues={initialValues} onSubmit={handleFilter}>
-        {({ handleSubmit, values }) => (
+      <Formik initialValues={props.initialValues} onSubmit={handleFilter}>
+        {({ handleSubmit }) => (
           <form className={styles.filterForm} onSubmit={handleSubmit}>
-            <TextInputField name="inputMovie" placeholder="Enter movie title" type="text" />
-            <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={true} name="selectGenre" options={genreOptions} placeholder="Select genre" />
-            <SelectField
-              closeMenuOnSelect={true}
-              isClearable={false}
-              isMulti={false}
-              name="selectSorting"
-              options={sortOptions}
-              placeholder="Select sorting"
-              value={values.sort}
-            />
+            <TextInputField name="title" placeholder="Enter movie title" type="text" />
+            <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={true} name="genres" options={genreOptions} placeholder="Select genre" />
+            <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={false} name="sort" options={sortOptions} placeholder="Select sorting" />
             <button className={styles.button} type="submit">
               Submit
             </button>

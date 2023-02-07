@@ -16,7 +16,9 @@ interface Props {
 
 const SelectField: React.FC<Props> = ({ ...props }) => {
   const [state] = useField(props.name);
-  return <Field className={styles.selectField} component={SelectFieldAdapter} value={state.value} {...props} />;
+  console.log(state);
+
+  return <Field className={styles.selectField} component={SelectFieldAdapter} {...props} />;
 };
 
 export default SelectField;
