@@ -19,18 +19,16 @@ const SelectFieldAdapter: React.FC<FieldProps & Props> = ({ field, form, options
   const selectRef = useRef<SelectRefValue>(null);
   const [fieldSelectValue, setFieldSelectValue] = useState<Option | Option[] | undefined>(undefined);
   const { value, name } = field;
+
   useEffect(() => {
-    const valueToSet = options.filter((option) => value.includes(option?.value));
+    const valueToSet = options.filter((option) => value.includes(option.value.toString()));
     setFieldSelectValue(valueToSet);
-  }, [value]);
+    if (name === 'genres') console.log(value, valueToSet, options);
+  }, [value, options]);
 
   const { setFieldValue } = form;
 
-  console.log(field);
-  console.log(value);
-
   const onChange = (newValue: SelectValue | SelectValue[]) => {
-    console.log(newValue);
     setFieldValue(name, newValue);
   };
 

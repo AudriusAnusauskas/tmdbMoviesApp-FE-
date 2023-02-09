@@ -27,14 +27,14 @@ const SelectFieldStateless = forwardRef((props: MySelectProps, ref: React.Ref<Se
   const onChange = (value: OnChangeValue<Option, boolean>) => {
     if (props.isMulti && Array.isArray(value)) {
       props.onChange?.(value.map((option) => option.value));
-      console.log(value);
     }
 
     if (!props.isMulti && value && 'value' in value) {
       props.onChange?.(value.value);
-      console.log(value);
     }
   };
+
+  if (props.isMulti) console.log(props.value);
 
   return (
     <div className={styles.movieListFilterSelectField}>
