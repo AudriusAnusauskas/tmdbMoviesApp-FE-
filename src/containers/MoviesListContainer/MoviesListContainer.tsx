@@ -4,41 +4,39 @@ import { useQuery } from 'react-query';
 import { getMovies } from 'api/movies/movies';
 import Loading from 'components/Loading/Loading';
 import Pagination from 'components/Pagination/Pagination';
-import { Formik } from 'formik';
 
-import SelectField from '../../components/Form/SelectField/SelectField';
-import TextInputField from '../../components/Form/TextInputField/TextInputField';
-import { genreOptions, sortOptions } from '../../components/Form/SelectField/options';
+import MoviesListFilter from '../../components/Form/MoviesListFilter/MoviesListFilter';
 import MovieCard from './MovieCard';
 import styles from './MoviesListContainer.module.css';
 
 const MoviesListContainer: React.FunctionComponent = () => {
-  const [searchParams, setSearchParams] = useSearchParams({});
+  const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page');
   const activePage = page ? parseInt(page, 10) : 1;
-  const { data, isError, isLoading, error } = useQuery(['movies', { page: activePage }], () => getMovies(activePage));
+
+  const movieFilter = {
+    title: searchParams.get('title') ?? '',
+    genres: searchParams.getAll('genres') ?? [],
+    sort: searchParams.get('sort') ?? '',
+  };
+
+  const fetchMovies = () => {
+    return getMovies(activePage, movieFilter.title, movieFilter.genres, movieFilter.sort);
+  };
+
+  const { data, isError, isLoading, error } = useQuery(
+    ['movies', { page: activePage, title: movieFilter.title, genres: movieFilter.genres, sort: movieFilter.sort }],
+    fetchMovies,
+  );
 
   if (isLoading) return <Loading />;
 
   if (isError) return <span>Error: {error}</span>;
   const movies = data?.page === activePage ? data.movies : [];
+
   return (
     <div className={styles.mainContentWrapper}>
-      <Formik
-        initialValues={{ inputMovie: '', selectGenre: [], selectSorting: '' }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
-      >
-        <form className={styles.filterForm}>
-          <TextInputField name="inputMovie" placeholder="Enter movie title" type="text" />
-          <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={true} name="selectGenre" options={genreOptions} placeholder="Select genre" />
-          <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={false} name="selectSorting" options={sortOptions} placeholder="Select sorting" />
-        </form>
-      </Formik>
+      <MoviesListFilter initialValues={movieFilter} />
       <div className={styles.moviesList}>
         {movies.map((movie) => (
           <MovieCard key={movie.movieId} {...movie} />
@@ -48,7 +46,7 @@ const MoviesListContainer: React.FunctionComponent = () => {
         activePage={activePage}
         totalPages={data?.totalPages as number}
         onPageChange={(page) => {
-          setSearchParams({ page: page.toString() });
+          setSearchParams({ ...movieFilter, page: page.toString() });
         }}
       />
     </div>

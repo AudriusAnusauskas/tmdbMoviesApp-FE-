@@ -3,6 +3,7 @@ import { FieldProps } from 'formik';
 
 const TextInputFieldAdapter: React.FC<FieldProps> = ({ field, form, ...props }) => {
   const { name, value } = field;
+
   const { touched, errors } = form;
   const hasError = touched[name] && errors[name];
 
