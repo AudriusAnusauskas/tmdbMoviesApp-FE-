@@ -20,11 +20,6 @@ export type Genre = {
   name: string;
 };
 
-export type GenreFilter = {
-  id: number;
-  name: string;
-};
-
 export type Genres = {
   genres: Genre[];
 };
