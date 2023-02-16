@@ -8,10 +8,6 @@ import TextInputField from '../TextInputField/TextInputField';
 import styles from './MoviesListFilter.module.css';
 import { Genre, Genres, Sort } from '../../../api/movies/types';
 
-// interface FilterParams {
-//   [key: string]: any;
-// }
-
 export type MovieListFilterFormValues = {
   title: string;
   genres: string[];
@@ -23,13 +19,13 @@ type MovieListFilterProps = {
 };
 
 const MoviesListFilter: React.FC<MovieListFilterProps> = (props) => {
-  const [genreOptions, setGenreOptions] = useState<Array<{ value: number; label: string }>>([]);
+  const [genreOptions, setGenreOptions] = useState<Array<{ value: string; label: string }>>([]);
   const [sortOptions, setSortOptions] = useState<Array<{ value: string; label: string }>>([]);
 
   useEffect(() => {
     const getGenreOptions = async () => {
       const resGenres = await get<Genres>(`genres`).then((e) => e.data.genres);
-      setGenreOptions(resGenres.map((item: Genre) => ({ value: item.id, label: item.name })));
+      setGenreOptions(resGenres.map((item: Genre) => ({ value: item.id.toString(), label: item.name })));
     };
     getGenreOptions();
   }, []);
@@ -41,17 +37,10 @@ const MoviesListFilter: React.FC<MovieListFilterProps> = (props) => {
     getSortOptions();
   }, []);
 
-  console.log(props.initialValues);
-
   const [searchParams, setSearchParams] = useSearchParams();
-  // const initialValues = {
-  //   page: searchParams.get('page') ?? 1,
-  //   title: searchParams.get('title') ?? '',
-  //   genres: searchParams.get('genres') ?? [],
-  //   sort: searchParams.get('sort') ?? '',
-  // };
 
   const handleFilter = (values: MovieListFilterFormValues) => {
+    // eslint-disable-next-line
     const params: any = {};
 
     if (values.title) {
@@ -67,6 +56,10 @@ const MoviesListFilter: React.FC<MovieListFilterProps> = (props) => {
     setSearchParams({ ...searchParams, ...params });
   };
 
+  const handleReset = () => {
+    setSearchParams({});
+  };
+
   return (
     <div>
       <Formik initialValues={props.initialValues} onSubmit={handleFilter}>
@@ -78,7 +71,7 @@ const MoviesListFilter: React.FC<MovieListFilterProps> = (props) => {
             <button className={styles.button} type="submit">
               Submit
             </button>
-            <button className={styles.button} type="button">
+            <button className={styles.button} type="button" onClick={handleReset}>
               Reset
             </button>
           </form>

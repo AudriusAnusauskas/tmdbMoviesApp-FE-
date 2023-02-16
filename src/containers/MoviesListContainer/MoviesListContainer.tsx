@@ -28,14 +28,11 @@ const MoviesListContainer: React.FunctionComponent = () => {
     ['movies', { page: activePage, title: movieFilter.title, genres: movieFilter.genres, sort: movieFilter.sort }],
     fetchMovies,
   );
+
   if (isLoading) return <Loading />;
 
   if (isError) return <span>Error: {error}</span>;
   const movies = data?.page === activePage ? data.movies : [];
-
-  // const onFilter = (title: string, genres: string, sort: string) => {
-  //   setSearchParams({ title, genres, sort, page: '1' });
-  // };
 
   return (
     <div className={styles.mainContentWrapper}>
@@ -49,7 +46,7 @@ const MoviesListContainer: React.FunctionComponent = () => {
         activePage={activePage}
         totalPages={data?.totalPages as number}
         onPageChange={(page) => {
-          setSearchParams({ page: page.toString() });
+          setSearchParams({ ...movieFilter, page: page.toString() });
         }}
       />
     </div>

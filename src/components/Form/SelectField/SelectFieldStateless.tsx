@@ -34,8 +34,6 @@ const SelectFieldStateless = forwardRef((props: MySelectProps, ref: React.Ref<Se
     }
   };
 
-  if (props.isMulti) console.log(props.value);
-
   return (
     <div className={styles.movieListFilterSelectField}>
       <Select

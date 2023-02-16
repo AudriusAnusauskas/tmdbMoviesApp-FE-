@@ -23,7 +23,6 @@ const SelectFieldAdapter: React.FC<FieldProps & Props> = ({ field, form, options
   useEffect(() => {
     const valueToSet = options.filter((option) => value.includes(option.value.toString()));
     setFieldSelectValue(valueToSet);
-    if (name === 'genres') console.log(value, valueToSet, options);
   }, [value, options]);
 
   const { setFieldValue } = form;
