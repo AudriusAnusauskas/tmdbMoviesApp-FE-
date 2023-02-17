@@ -32,14 +32,32 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
   return (
     <header className={styles.header} {...props}>
       <MyMoviesLogo className={styles.icon} />
-      <>
-        {matches ? <HamburgerButton isActive={isSidebarVisible} onClick={handleButtonClick} /> : <NavigationLink />}
+      <nav>
+        {matches ? (
+          <HamburgerButton isActive={isSidebarVisible} onClick={handleButtonClick} />
+        ) : (
+          <ul className={styles.navigationUL}>
+            <li className={styles.navigationLI}>
+              <NavigationLink />
+            </li>
+            <li className={styles.navigationLI}>
+              <button className={styles.modalSigninButton}>Sign-in/up</button>
+            </li>
+          </ul>
+        )}
         {isSidebarVisible && (
           <Sidebar onBackdropClick={closeSidebar}>
-            <NavigationLink />
+            <ul className={styles.navigationULSidebar}>
+              <li className={styles.navigationLI}>
+                <NavigationLink />
+              </li>
+              <li className={styles.navigationLI}>
+                <button className={styles.modalSigninButton}>Sign-in/up</button>
+              </li>
+            </ul>
           </Sidebar>
         )}
-      </>
+      </nav>
     </header>
   );
 };

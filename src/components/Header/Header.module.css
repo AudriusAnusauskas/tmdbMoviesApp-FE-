@@ -10,7 +10,40 @@
   z-index: var(--zIndexHeader);
 }
 
-.icon {
+.icon{
   height: 44px;
   width: 40px;
+}
+
+.modalSigninButton{
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  color: var(--black);
+  cursor: pointer;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+}
+
+.modalSigninButton:hover{
+  border-bottom: 2px solid var(--secondary);
+  margin-bottom: -2px;
+  }
+
+.navigationLI{
+  margin: 15px 20px;
+}
+
+.navigationUL{
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.navigationULSidebar{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
 }
