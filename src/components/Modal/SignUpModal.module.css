@@ -1,0 +1,37 @@
+.textInputFieldWrapper{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.textInputFieldLabel{
+  color: var(--darkGrey);
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.textInputField{
+  border: 1px solid var(--grey);
+  border-radius: 3px;
+  padding: 10px 15px;
+}
+
+.formChangeText{
+  color: var(--black);
+  font-size: 12px;
+}
+
+.formChangeButton{
+  background: none;
+  border: none;
+  color: var(--black);
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 5px;
+  padding: 0;
+}
+
+.formChangeButton:hover{
+  border-bottom: 1px solid var(--secondary);
+  color: var(--secondary);
+}

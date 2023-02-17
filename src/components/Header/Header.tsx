@@ -6,6 +6,7 @@ import NavigationLink from 'components/NavigationLink/NavigationLink';
 import useMediaQuery from 'Hooks/useMediaQuery';
 
 import styles from './Header.module.css';
+import Modal from '../Modal/Modal';
 
 interface Props {
   children?: ReactNode;
@@ -13,6 +14,8 @@ interface Props {
 
 const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const { matches } = useMediaQuery({ matchQuery: '(max-width: 768px)' });
 
   useEffect(() => {
@@ -23,6 +26,10 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
 
   const handleButtonClick = () => {
     setIsSidebarVisible((isSidebarVisible) => !isSidebarVisible);
+  };
+
+  const handleButtonClickModal = () => {
+    setIsModalVisible((isModalVisible) => !isModalVisible);
   };
 
   const closeSidebar = () => {
@@ -41,7 +48,9 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
               <NavigationLink />
             </li>
             <li className={styles.navigationLI}>
-              <button className={styles.modalSigninButton}>Sign-in/up</button>
+              <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
+                Sign-in/up
+              </button>
             </li>
           </ul>
         )}
@@ -52,11 +61,14 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
                 <NavigationLink />
               </li>
               <li className={styles.navigationLI}>
-                <button className={styles.modalSigninButton}>Sign-in/up</button>
+                <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
+                  Sign-in/up
+                </button>
               </li>
             </ul>
           </Sidebar>
         )}
+        {isModalVisible && <Modal handleClose={handleButtonClickModal}>modal</Modal>}
       </nav>
     </header>
   );
