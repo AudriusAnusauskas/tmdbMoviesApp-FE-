@@ -5,6 +5,7 @@ import HamburgerButton from 'components/HamburgerButton/HamburgerButton';
 import NavigationLink from 'components/NavigationLink/NavigationLink';
 import useMediaQuery from 'Hooks/useMediaQuery';
 
+import { signUp } from '../../api/signUp';
 import styles from './Header.module.css';
 import Modal from '../Modal/Modal';
 
@@ -68,7 +69,7 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
             </ul>
           </Sidebar>
         )}
-        {isModalVisible && <Modal handleClose={handleButtonClickModal}>modal</Modal>}
+        {isModalVisible && <Modal handleClose={handleButtonClickModal} onSubmit={signUp} />}
       </nav>
     </header>
   );

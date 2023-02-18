@@ -10,7 +10,8 @@
   --secondary: #61dafb;
   --secondaryHover: #62c4df;
   --backdropGrey: hsla(0,0%,75.3%,.9);
-  --rippleLemon: #f5c518
+  --rippleLemon: #f5c518;
+  --red: red;
 }
 
 body {

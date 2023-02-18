@@ -35,3 +35,9 @@
   border-bottom: 1px solid var(--secondary);
   color: var(--secondary);
 }
+
+.errorText{
+  color: var(--red);
+    font-size: 12px;
+    margin-top: 5px;
+}
