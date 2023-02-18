@@ -1,0 +1,112 @@
+.backdrop{
+  align-items: center;
+  background-color: var(--backdropGrey);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+.modal{
+  background-color: var(--white);
+  border: 1px solid var(--grey);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 300px;
+  min-width: 300px;
+  padding: 15px;
+}
+
+.modalHeader{
+  font-size: 16px;
+  text-align: center;
+}
+
+.modalFooter{
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalCancelButton{
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  color: var(--black);
+  cursor: pointer;
+  font: inherit;
+  height: 100%;
+  margin-right: 10px;
+  outline: inherit;
+  padding: 0;
+}
+
+.modalCancelButton:hover{
+  border-bottom: 2px solid var(--secondary);
+  border-radius: 0;
+  margin-bottom: -2px;
+  }
+
+  .modalSigninuplButton{
+    background: var(--secondary);
+    border: none;
+    border-radius: 3px;
+    color: var(--white);
+    cursor: pointer;
+    font: inherit;
+    outline: inherit;
+    padding: 10px 15px;
+  }
+
+  .modalSigninuplButton:hover{
+    background: var(--secondaryHover);
+  }
+
+  .textInputFieldWrapper{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .textInputFieldLabel{
+    color: var(--darkGrey);
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  
+  .textInputField{
+    border: 1px solid var(--grey);
+    border-radius: 3px;
+    padding: 10px 15px;
+  }
+  
+  .formChangeText{
+    color: var(--black);
+    font-size: 12px;
+  }
+  
+  .formChangeButton{
+    background: none;
+    border: none;
+    color: var(--black);
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 5px;
+    padding: 0;
+  }
+  
+  .formChangeButton:hover{
+    border-bottom: 1px solid var(--secondary);
+    color: var(--secondary);
+  }
+  
+  .errorText{
+    color: var(--red);
+      font-size: 12px;
+      margin-top: 5px;
+  }

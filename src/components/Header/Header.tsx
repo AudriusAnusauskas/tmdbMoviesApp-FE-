@@ -5,7 +5,9 @@ import HamburgerButton from 'components/HamburgerButton/HamburgerButton';
 import NavigationLink from 'components/NavigationLink/NavigationLink';
 import useMediaQuery from 'Hooks/useMediaQuery';
 
+import { signUp } from '../../api/signUp';
 import styles from './Header.module.css';
+import Modal from '../Modal/Modal';
 
 interface Props {
   children?: ReactNode;
@@ -13,6 +15,8 @@ interface Props {
 
 const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const { matches } = useMediaQuery({ matchQuery: '(max-width: 768px)' });
 
   useEffect(() => {
@@ -25,6 +29,10 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
     setIsSidebarVisible((isSidebarVisible) => !isSidebarVisible);
   };
 
+  const handleButtonClickModal = () => {
+    setIsModalVisible((isModalVisible) => !isModalVisible);
+  };
+
   const closeSidebar = () => {
     setIsSidebarVisible(false);
   };
@@ -32,14 +40,37 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
   return (
     <header className={styles.header} {...props}>
       <MyMoviesLogo className={styles.icon} />
-      <>
-        {matches ? <HamburgerButton isActive={isSidebarVisible} onClick={handleButtonClick} /> : <NavigationLink />}
+      <nav>
+        {matches ? (
+          <HamburgerButton isActive={isSidebarVisible} onClick={handleButtonClick} />
+        ) : (
+          <ul className={styles.navigationUL}>
+            <li className={styles.navigationLI}>
+              <NavigationLink />
+            </li>
+            <li className={styles.navigationLI}>
+              <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
+                Sign-in/up
+              </button>
+            </li>
+          </ul>
+        )}
         {isSidebarVisible && (
           <Sidebar onBackdropClick={closeSidebar}>
-            <NavigationLink />
+            <ul className={styles.navigationULSidebar}>
+              <li className={styles.navigationLI}>
+                <NavigationLink />
+              </li>
+              <li className={styles.navigationLI}>
+                <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
+                  Sign-in/up
+                </button>
+              </li>
+            </ul>
           </Sidebar>
         )}
-      </>
+        {isModalVisible && <Modal handleClose={handleButtonClickModal} onSubmit={signUp} />}
+      </nav>
     </header>
   );
 };

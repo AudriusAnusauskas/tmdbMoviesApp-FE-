@@ -3,12 +3,15 @@
   --backgroundHeader: #fff;
   --backgroundFooter: #61dafb;
   --hamburgerBlack: #000000;
+  --darkGrey:#8c8c8c;
   --grey: #d7d7d7;
   --white: #fff;
   --black: #000000;
   --secondary: #61dafb;
+  --secondaryHover: #62c4df;
   --backdropGrey: hsla(0,0%,75.3%,.9);
-  --rippleLemon: #f5c518
+  --rippleLemon: #f5c518;
+  --red: red;
 }
 
 body {
