@@ -1,11 +1,11 @@
-import React, { ReactNode, useState, useEffect } from 'react';
+import React, { ReactNode, useState, useEffect, useContext } from 'react';
 import { MyMoviesLogo } from 'components/Icons';
 import Sidebar from 'components/Sidebar/Sidebar';
 import HamburgerButton from 'components/HamburgerButton/HamburgerButton';
 import NavigationLink from 'components/NavigationLink/NavigationLink';
 import useMediaQuery from 'Hooks/useMediaQuery';
 
-import { signUp } from '../../api/signUp';
+import { UserContext } from '../../providers/UserContext';
 import styles from './Header.module.css';
 import Modal from '../Modal/Modal';
 
@@ -18,6 +18,7 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { matches } = useMediaQuery({ matchQuery: '(max-width: 768px)' });
+  const { signedIn } = useContext(UserContext);
 
   useEffect(() => {
     if (matches) {
@@ -49,9 +50,15 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
               <NavigationLink />
             </li>
             <li className={styles.navigationLI}>
-              <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
-                Sign-in/up
-              </button>
+              {signedIn ? (
+                <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
+                  Sign-out
+                </button>
+              ) : (
+                <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
+                  Sign-in/up
+                </button>
+              )}
             </li>
           </ul>
         )}
@@ -69,7 +76,7 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
             </ul>
           </Sidebar>
         )}
-        {isModalVisible && <Modal handleClose={handleButtonClickModal} onSubmit={signUp} />}
+        {isModalVisible && <Modal handleClose={handleButtonClickModal} />}
       </nav>
     </header>
   );
