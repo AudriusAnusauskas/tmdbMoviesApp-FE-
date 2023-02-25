@@ -8,15 +8,13 @@ export interface SignUpFormValues {
   password: string;
 }
 
-const signUp = (values: SignUpFormValues): void => {
-  axios
-    .post(`${BASE_API_URL}/sign-up`, values)
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const signUp = async (values: SignUpFormValues): Promise<void> => {
+  try {
+    const response = await axios.post(`${BASE_API_URL}/sign-up`, values);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export { signUp };
