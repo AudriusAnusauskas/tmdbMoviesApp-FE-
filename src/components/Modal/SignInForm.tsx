@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, useFormik } from 'formik';
 import TextInputField from 'components/Form/TextInputField/TextInputField';
 
 import { loginSchema } from './signupSchema';
-import { login } from '../../api/login';
+import { UserContext } from '../../providers/UserContext';
 import styles from './SignForm.module.css';
 
 type Props = {
@@ -13,6 +13,7 @@ type Props = {
 
 const SignInForm: React.FC<Props> = (props: Props) => {
   const { handleClose } = props;
+  const { login } = useContext(UserContext);
 
   const formik = useFormik({
     initialValues: {

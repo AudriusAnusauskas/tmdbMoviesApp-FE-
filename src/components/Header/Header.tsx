@@ -18,7 +18,7 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { matches } = useMediaQuery({ matchQuery: '(max-width: 768px)' });
-  const { signedIn } = useContext(UserContext);
+  const { isAuthorized } = useContext(UserContext);
 
   useEffect(() => {
     if (matches) {
@@ -50,15 +50,9 @@ const Header: React.FunctionComponent<Props> = ({ ...props }: Props) => {
               <NavigationLink />
             </li>
             <li className={styles.navigationLI}>
-              {signedIn ? (
-                <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
-                  Sign-out
-                </button>
-              ) : (
-                <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
-                  Sign-in/up
-                </button>
-              )}
+              <button className={styles.modalSigninButton} onClick={handleButtonClickModal}>
+                {isAuthorized ? 'Sign-out' : 'Sign-in/up'}
+              </button>
             </li>
           </ul>
         )}

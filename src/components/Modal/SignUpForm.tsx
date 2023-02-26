@@ -21,7 +21,10 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
       password: '',
     },
     validationSchema: signUpSchema,
-    onSubmit: signUp,
+    onSubmit: () => {
+      props.toggleForms;
+      signUp;
+    },
   });
 
   return (
@@ -54,7 +57,7 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
             <button className={styles.formCancelButton} onClick={handleClose}>
               Cancel
             </button>
-            <button className={styles.formSigninuplButton} type="submit" value="signin">
+            <button className={styles.formSigninuplButton} type="submit">
               Sign-up
             </button>
           </footer>

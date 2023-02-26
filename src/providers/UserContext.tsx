@@ -1,34 +1,39 @@
 import React, { createContext, useState } from 'react';
+import { LoginFormValues, login } from 'api/login';
 
 interface UserContextProps {
-  signedIn: boolean;
+  isAuthorized: boolean;
   token: string | null;
-  login: (token: string) => void;
+  login: (values: LoginFormValues) => Promise<void>;
   logout: () => void;
 }
 
 export const UserContext = createContext<UserContextProps>({
-  signedIn: false,
+  isAuthorized: false,
   token: null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  login: () => {},
+  login: () => Promise.resolve(),
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   logout: () => {},
 });
 
 export const UserProvider: React.FC = ({ children }) => {
-  const [signedIn, setSignedIn] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(false);
   const [token, setToken] = useState<string | null>(null);
 
-  const login = (token: string): void => {
-    setSignedIn(true);
-    setToken(token);
+  const handleLogin = async (values: LoginFormValues): Promise<void> => {
+    try {
+      const responseToken = await login(values);
+      setToken(responseToken);
+      setIsAuthorized(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const logout = (): void => {
-    setSignedIn(false);
+  const handleLogout = (): void => {
+    setIsAuthorized(false);
     setToken(null);
   };
 
-  return <UserContext.Provider value={{ signedIn, token, login, logout }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ isAuthorized, token, login: handleLogin, logout: handleLogout }}>{children}</UserContext.Provider>;
 };

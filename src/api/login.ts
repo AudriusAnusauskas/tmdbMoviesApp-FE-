@@ -7,12 +7,14 @@ export interface LoginFormValues {
   password: string;
 }
 
-const login = async (values: LoginFormValues): Promise<void> => {
+const login = async (values: LoginFormValues): Promise<string | null> => {
   try {
     const response = await axios.post(`${BASE_API_URL}/login`, values);
-    console.log(response.data);
+
+    return response.data.token;
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
 
