@@ -56,14 +56,20 @@ const MoviesListFilter: React.FC<MovieListFilterProps> = (props) => {
     setSearchParams({ ...searchParams, ...params });
   };
 
-  const handleReset = () => {
+  const handleReset = (values: MovieListFilterFormValues, setValues: (values: MovieListFilterFormValues) => void) => {
+    setValues({
+      ...values,
+      title: '',
+      genres: [],
+      sort: '',
+    });
     setSearchParams({});
   };
 
   return (
     <div>
       <Formik initialValues={props.initialValues} onSubmit={handleFilter}>
-        {({ handleSubmit }) => (
+        {({ handleSubmit, setValues }) => (
           <form className={styles.filterForm} onSubmit={handleSubmit}>
             <TextInputField name="title" placeholder="Enter movie title" type="text" />
             <SelectField closeMenuOnSelect={true} isClearable={false} isMulti={true} name="genres" options={genreOptions} placeholder="Select genre" />
@@ -71,7 +77,7 @@ const MoviesListFilter: React.FC<MovieListFilterProps> = (props) => {
             <button className={styles.button} type="submit">
               Submit
             </button>
-            <button className={styles.button} type="button" onClick={handleReset}>
+            <button className={styles.button} type="button" onClick={() => handleReset(props.initialValues, setValues)}>
               Reset
             </button>
           </form>
