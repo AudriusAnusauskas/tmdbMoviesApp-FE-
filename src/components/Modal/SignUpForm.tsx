@@ -8,7 +8,8 @@ import styles from './SignForm.module.css';
 
 type Props = {
   handleClose: () => void;
-  toggleForms: () => void;
+  // eslint-disable-next-line
+  toggleForms: (values: any) => void;
 };
 
 const SignUpForm: React.FC<Props> = (props: Props) => {
@@ -21,10 +22,7 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
       password: '',
     },
     validationSchema: signUpSchema,
-    onSubmit: () => {
-      props.toggleForms;
-      signUp;
-    },
+    onSubmit: signUp,
   });
 
   return (

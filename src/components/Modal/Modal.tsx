@@ -10,9 +10,11 @@ type ModalProps = {
 
 const Modal: React.FC<ModalProps> = (props: ModalProps) => {
   const [signUpSignIn, setSignUpSignIn] = useState(true);
+  const [signUpValues, setSignUpValues] = useState({ name: '', email: '', password: '' });
 
-  const toggleForms = () => {
+  const toggleForms = (values: any) => {
     setSignUpSignIn(!signUpSignIn);
+    setSignUpValues(values);
   };
 
   return (
@@ -20,7 +22,7 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
       {signUpSignIn ? (
         <SignUpForm handleClose={props.handleClose} toggleForms={toggleForms} />
       ) : (
-        <SignInForm handleClose={props.handleClose} toggleForms={toggleForms} />
+        <SignInForm handleClose={props.handleClose} signUpValues={signUpValues} toggleForms={toggleForms} />
       )}
     </div>
   );

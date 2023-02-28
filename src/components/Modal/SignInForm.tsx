@@ -8,17 +8,18 @@ import styles from './SignForm.module.css';
 
 type Props = {
   handleClose: () => void;
-  toggleForms: () => void;
+  toggleForms: (values: any) => void;
+  signUpValues: { name: string; email: string; password: string };
 };
 
 const SignInForm: React.FC<Props> = (props: Props) => {
-  const { handleClose } = props;
+  const { handleClose, signUpValues } = props;
   const { login } = useContext(UserContext);
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: signUpValues.email || '',
+      password: signUpValues.password || '',
     },
     validationSchema: loginSchema,
     onSubmit: login,
