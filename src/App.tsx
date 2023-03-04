@@ -1,12 +1,15 @@
 import Layout from 'components/Layout/Layout';
 import MainRouter from 'navigation/MainRouter';
+import { UserProvider } from 'providers/UserContext';
 
 function App(): JSX.Element {
   return (
     <>
-      <Layout>
-        <MainRouter />
-      </Layout>
+      <UserProvider>
+        <Layout>
+          <MainRouter />
+        </Layout>
+      </UserProvider>
     </>
   );
 }
