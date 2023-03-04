@@ -1,10 +1,14 @@
 import { TbHeartPlus } from 'react-icons/tb';
-import { addToMyMoviesList } from 'api/addToMyMoviesList';
+import { addToMyMoviesList, PersonalMovie } from 'api/addToMyMoviesList';
 
-import { Movie } from '../../api/movies/types';
 import styles from './Favorit.module.css';
 
-const Favorite = (props: { movie: Movie; onClick: () => void }) => {
+interface FavoriteProps {
+  movie: PersonalMovie;
+  onClick: () => void;
+}
+
+const Favorite: React.FC<FavoriteProps> = (props) => {
   const handleAddToFavoriteMoviesList = (): void => {
     addToMyMoviesList(props.movie);
   };

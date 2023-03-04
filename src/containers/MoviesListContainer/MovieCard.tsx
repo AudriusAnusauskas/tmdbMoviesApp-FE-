@@ -1,25 +1,26 @@
 import React, { useContext } from 'react';
 import { Movie } from 'api/movies/types';
 import { UserContext } from 'providers/UserContext';
-import { addToMyMoviesList } from 'api/addToMyMoviesList';
+import { addToMyMoviesList, PersonalMovie } from 'api/addToMyMoviesList';
 
 import styles from './MovieCard.module.css';
 import Favorite from '../../components/Favorite/Favorite';
 
-const MovieCard = ({ movieId, title, releaseDate, voteAverage, posterPath, backdropPath }: Movie): JSX.Element => {
+const MovieCard = ({ movieId, title, releaseDate, voteAverage, posterPath, backdropPath, email }: Movie): JSX.Element => {
   const { isAuthorized } = useContext(UserContext);
 
-  const movie: Movie = {
+  const movie: PersonalMovie | Movie = {
     movieId,
     title,
     releaseDate,
     voteAverage,
     posterPath,
     backdropPath,
+    email,
   };
 
   const handleAddToMyMoviesList = () => {
-    addToMyMoviesList(movie);
+    addToMyMoviesList(movie as PersonalMovie);
   };
 
   return (
@@ -48,7 +49,7 @@ const MovieCard = ({ movieId, title, releaseDate, voteAverage, posterPath, backd
           </p>
         </div>
         <p className={styles.releaseDate}>
-          {releaseDate} {isAuthorized ? <Favorite movie={movie} onClick={handleAddToMyMoviesList} /> : null}
+          {releaseDate} {isAuthorized ? <Favorite movie={movie as PersonalMovie} onClick={handleAddToMyMoviesList} /> : null}
         </p>
       </div>
     </div>
